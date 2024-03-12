@@ -16,6 +16,7 @@ def input_ip():
             print('格式错误！')
             input_ip()
 
+    # 简单判断IP地址格式
     elif not re.match(r'^(\d{1,3}\.){3}\d{1,3}$', ip):
         print('格式错误！')
         input_ip()
