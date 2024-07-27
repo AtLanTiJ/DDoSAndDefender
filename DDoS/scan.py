@@ -3,7 +3,6 @@ import ipaddress
 import threading
 from queue import Queue
 
-
 # 定义线程数
 NUM_THREADS = 200
 
@@ -12,7 +11,6 @@ queue = Queue()
 
 # 本地IP
 LOCAL_IP = socket.gethostbyname(socket.gethostname())
-
 
 
 # 扫描端口函数
@@ -39,7 +37,7 @@ def main():
     target = input("输入要扫描的IP或网段: ")
     ports = input("输入要扫描的端口范围 (e.g., 1-1000，使用默认策略输入0): ")
 
- # 解析 IP 地址或网段
+    # 解析 IP 地址或网段
     try:
         network = ipaddress.ip_network(target)
         ips = [str(ip) for ip in network.hosts()]
@@ -67,7 +65,7 @@ def main():
     elif '-' in ports:
         # 处理端口范围扫描
         start_port, end_port = map(int, ports.split('-'))
-         # 创建线程
+        # 创建线程
         for _ in range(NUM_THREADS):
             t = threading.Thread(target=worker)
             t.daemon = True
